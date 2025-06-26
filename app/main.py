@@ -38,7 +38,10 @@ class FlyingRobot(BaseRobot):
             coords: list | None = None
     ) -> None:
         coords = coords or [0, 0, 0]
-        coords = coords if len(coords) == 3 else coords + [0]
+        if len(coords) == 2:
+            coords = coords + [0]
+        elif len(coords) != 3:
+            raise ValueError("coords must contain two or three elements")
 
         super().__init__(name, weight, coords[:2])
         self.coords = coords
